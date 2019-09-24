@@ -15,7 +15,7 @@ function buildMetadata(sample) {
     // Use d3 to select the panel with id of `#sample-metadata`
   d3.json(metaSample).then(function(data){
     // Use `.html("") to clear any existing metadata
-  console.log(data);
+  
   jage.textContent = "Age: " + data.AGE;
   jbbtype.textContent = "BBTYPE: " + data.BBTYPE;
   jethnicity.textContent = "Ethnicity: " + data.ETHNICITY;
@@ -40,6 +40,27 @@ function buildMetadata(sample) {
 }
 
 function buildCharts(sample) {
+  let sampleSamples = "/samples/" + sample;
+
+
+d3.json(sampleSamples).then(function(data) {
+  let otu_ids = data.otu_ids;
+  let samp_val = data.sample_values;
+
+  let trace1 = {
+  labels: otu_ids,
+  values: samp_val,
+  type: "pie"
+  };
+  let data_p = [trace1];
+
+  let layout = {title: "a pie",
+
+  };
+  Plotly.newPlot("pie", data_p, layout);
+});
+
+
 
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
@@ -49,7 +70,7 @@ function buildCharts(sample) {
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
-}
+};
 
 function init() {
   // Grab a reference to the dropdown select element
@@ -64,7 +85,7 @@ function init() {
         .property("value", sample);
         
     });
-
+    
     // Use the first sample from the list to build the initial plots
     const firstSample = sampleNames[0];
     buildCharts(firstSample);
