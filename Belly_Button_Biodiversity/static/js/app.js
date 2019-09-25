@@ -44,9 +44,12 @@ function buildCharts(sample) {
 
 
 d3.json(sampleSamples).then(function(data) {
-  let otu_ids = data.otu_ids;
-  let samp_val = data.sample_values;
+  let otu_ids = data.otu_ids.slice(0,10);
+  let samp_val = data.sample_values.slice(0,10);
   
+  console.log(otu_ids);
+  console.log(samp_val);
+
   let trace1 = {
   labels: otu_ids,
   values: samp_val,
@@ -55,9 +58,10 @@ d3.json(sampleSamples).then(function(data) {
   let pieData = [trace1];
 
   let layout = {
+    
     autosize: false,
-    width: 500,
-    height: 500,
+    width: 800,
+    height: 800,
     margin: {
       l: 50,
       r: 50,
