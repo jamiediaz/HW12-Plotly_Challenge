@@ -46,7 +46,7 @@ function buildCharts(sample) {
 d3.json(sampleSamples).then(function(data) {
   let otu_ids = data.otu_ids.slice(0,10);
   let samp_val = data.sample_values.slice(0,10);
-  
+  let otu_lab = data.otu_labels.slice(0,10);
   console.log(otu_ids);
   console.log(samp_val);
 
@@ -72,11 +72,41 @@ d3.json(sampleSamples).then(function(data) {
 
   };
   Plotly.newPlot("pie", pieData, layout);
+
+
+let trace2 = {
+  x: otu_ids,
+  y: samp_val,
+  text: otu_lab,
+  mode: 'markers',
+  marker: {
+    size: samp_val,
+    color: otu_ids
+    
+   
+  }
+};
+
+let bubbleData = [trace2];
+
+let bubbleLayout = {
+  
+  showLegend: false,
+  // height: 600,
+  // width: 1000
+  // margin: {
+  //   l: 50,
+  //   r: 50,
+    // b: 100,
+    // t: 25,
+    // pad: 4
+  // }
+  
+};
+
+Plotly.newPlot("bubble",bubbleData,bubbleLayout);
+
 });
-
-
-
-
   // @TODO: Use `d3.json` to fetch the sample data for the plots
 
     // @TODO: Build a Bubble Chart using the sample data
