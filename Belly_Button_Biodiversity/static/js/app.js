@@ -46,7 +46,7 @@ function buildCharts(sample) {
 d3.json(sampleSamples).then(function(data) {
   let otu_ids = data.otu_ids;
   let samp_val = data.sample_values;
-
+  
   let trace1 = {
   labels: otu_ids,
   values: samp_val,
@@ -54,7 +54,17 @@ d3.json(sampleSamples).then(function(data) {
   };
   let data_p = [trace1];
 
-  let layout = {title: "a pie",
+  let layout = {
+    autosize: false,
+    width: 500,
+    height: 500,
+    margin: {
+      l: 50,
+      r: 50,
+      b: 100,
+      t: 100,
+      pad: 4
+    }
 
   };
   Plotly.newPlot("pie", data_p, layout);
