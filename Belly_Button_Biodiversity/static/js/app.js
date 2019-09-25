@@ -52,7 +52,7 @@ d3.json(sampleSamples).then(function(data) {
   values: samp_val,
   type: "pie"
   };
-  let data_p = [trace1];
+  let pieData = [trace1];
 
   let layout = {
     autosize: false,
@@ -67,7 +67,7 @@ d3.json(sampleSamples).then(function(data) {
     }
 
   };
-  Plotly.newPlot("pie", data_p, layout);
+  Plotly.newPlot("pie", pieData, layout);
 });
 
 
